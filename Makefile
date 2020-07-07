@@ -16,9 +16,12 @@ CXX = g++ ${CXXFLAGS}
 SRCS = $(wildcard *.cpp)
 EXECUTABLE_FILES = $(SRCS:%.cpp=$(BIN_DIR)/%)
 OBJECT_FILES = $(SRCS:%.cpp=$(OBJS_DIR)/%.o)
+#TEST_OBJS=$(OBJS_DIR)/stress-three-way.o
+#OBJECT_FILES=$(filter-out $(TEST_OBJS),$(OBJECT_FILES))
 
 .PHONY: all clean
 all: $(EXECUTABLE_FILES)
+#all: $(EXECUTABLE_FILES) $(BIN_DIR)/stress-three-way
 
 $(BIN_DIR)/%: $(OBJS_DIR)/%.o
 	@$(CXX) $(LDFLAGS) -o $@ $^
@@ -28,10 +31,20 @@ $(OBJS_DIR)/%.o: %.cpp
 	@mkdir -p $(@D)
 	@$(CXX) $(CXXFLAGS) -o $@ -c $<
 
+#$(BIN_DIR)/stress-three-way: $(OBJS_DIR)/stress-three-way.o
+#	@$(CXX) $(LDFLAGS) -o $@ $^
+#
+#$(OBJS_DIR)/stress-three-way.o: three-partition-qsort.cpp
+#	$(info Building object file for "$(<)")
+#	@mkdir -p $(@D)
+#	@$(CXX) $(CXXFLAGS) -D STRESS_TEST -o $@ -c $<
+
 $(OBJS_DIR)/selection-sort.o: util.h
 $(OBJS_DIR)/merge-sort.o: util.h
 $(OBJS_DIR)/count-sort.o: util.h
 $(OBJS_DIR)/quick-sort.o: util.h
+$(OBJS_DIR)/three-partition-qsort.o: util.h
+#$(OBJS_DIR)/stress-three-way.o: util.h
 
 clean:
 	rm $(OBJS_DIR)/*.o

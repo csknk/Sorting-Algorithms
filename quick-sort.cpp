@@ -25,7 +25,7 @@ void quickSort(std::vector<int>& v, size_t leftIndex, size_t rightIndex)
 	if (leftIndex >= rightIndex) {
 		return;	
 	}
-	size_t m = partition(v, leftIndex, rightIndex);
+	size_t m = partition2(v, leftIndex, rightIndex);
 	quickSort(v, leftIndex, m - 1);
 	quickSort(v, m + 1, rightIndex);
 }
