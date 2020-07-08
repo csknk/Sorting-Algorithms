@@ -20,7 +20,20 @@ using std::swap;
  * */
 std::tuple<int, int> partition3(vector<int> &a, int left, int right)
 {
-	int i = left, lt = left, gt = right;
+
+	// Initialise variables that will, at the end of the function, hold values
+	// of the indices that define the grouped pivot value(s).
+	// - `lt` "less than" below this point, indexes refer to values < pivot
+	// - `gt` "greater than" above this point, indexes refer to values > pivot 
+	int lt = left, gt = right;
+
+
+	// Scan the array using i as an index. Start at `left`, finish at  `gt`.
+	// Finish at `gt` because as the function progresses, anything to the
+	// right of `gt` has already been compared with the pivot.
+	int i = left;
+	
+	// Initialise the pivot value that will be used for comparison.
 	int pivotVal = a[i];
 	while (i <= gt) {
 		if (a[i] < pivotVal) {
