@@ -1,12 +1,17 @@
-#ifndef STRESS-TEST_H
-#define STRESS-TEST_H 
+#ifndef STRESS_TEST_H
+#define STRESS_TEST_H 
+
+#include <algorithm>
+
+void printVec(const std::vector<int>& v, int tab);
 
 bool repeat(int ratio)
 {
 	return rand() % ratio == 0 ? true : false;
 }
 
-void stressTest()
+void stressTest(void(*driverFunc)(std::vector<int>& v))
+//void stressTest()
 {
 	const int arrMaxLen = 200;
 	const int maxNum = 9999;	
@@ -58,7 +63,7 @@ void stressTest()
 
 		std::vector<int> vDupe = v;
 		std::sort(vDupe.begin(), vDupe.end());
-		randomized_quick_sort(v, 0, v.size() - 1);
+		driverFunc(v);
 		if (v != vDupe) {
 			std::cout << "Wrong answer:\n";
 			std::cout << "TEST:\t";
@@ -87,4 +92,4 @@ void printVec(const std::vector<int>& v, int tab)
 	}
 	std::cout << " ]\n";
 }
-#endif /* STRESS-TEST_H */
+#endif /* STRESS_TEST_H */

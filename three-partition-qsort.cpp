@@ -32,7 +32,7 @@ std::tuple<int, int> partition3(vector<int> &a, int left, int right)
 	// Finish at `gt` because as the function progresses, anything to the
 	// right of `gt` has already been compared with the pivot.
 	int i = left;
-	
+
 	// Initialise the pivot value that will be used for comparison.
 	int pivotVal = a[i];
 	while (i <= gt) {
@@ -50,7 +50,7 @@ std::tuple<int, int> partition3(vector<int> &a, int left, int right)
 	return std::tuple<int, int> {lt, gt};
 }
 
-void randomized_quick_sort(vector<int> &a, int l, int r)
+void randomizedQuickSort(vector<int> &a, int l, int r)
 {
 	if (l > r) {
 		return;
@@ -60,8 +60,13 @@ void randomized_quick_sort(vector<int> &a, int l, int r)
 	swap(a[l], a[k]);
 	int m1, m2;
 	std::tie (m1, m2) = partition3(a, l, r);
-	randomized_quick_sort(a, l, m1 - 1);
-	randomized_quick_sort(a, m2 + 1, r);
+	randomizedQuickSort(a, l, m1 - 1);
+	randomizedQuickSort(a, m2 + 1, r);
+}
+
+void driver(std::vector<int>& v)
+{
+	randomizedQuickSort(v, 0, v.size() - 1);
 }
 
 int main()
@@ -76,7 +81,7 @@ int main()
 	for (size_t i = 0; i < a.size(); ++i) {
 		std::cin >> a[i];
 	}
-	randomized_quick_sort(a, 0, a.size() - 1);
+	randomizedQuickSort(a, 0, a.size() - 1);
 	for (size_t i = 0; i < a.size(); ++i) {
 		std::cout << a[i] << ' ';
 	}
@@ -140,7 +145,7 @@ void stressTest()
 
 		std::vector<int> vDupe = v;
 		std::sort(vDupe.begin(), vDupe.end());
-		randomized_quick_sort(v, 0, v.size() - 1);
+		randomizedQuickSort(v, 0, v.size() - 1);
 		if (v != vDupe) {
 			std::cout << "Wrong answer:\n";
 			std::cout << "TEST:\t";

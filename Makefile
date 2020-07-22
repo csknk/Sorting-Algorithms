@@ -40,6 +40,7 @@ $(OBJS_DIR)/%.o: %.cpp
 #	@$(CXX) $(CXXFLAGS) -D STRESS_TEST -o $@ -c $<
 
 $(OBJS_DIR)/selection-sort.o: util.h
+$(OBJS_DIR)/merge-sort-simple.o: util.h
 $(OBJS_DIR)/merge-sort.o: util.h
 $(OBJS_DIR)/count-sort.o: util.h
 $(OBJS_DIR)/quick-sort.o: util.h
